@@ -16,14 +16,20 @@ function showQuestion() {
         // barra de status das questões.
 
         let pct = Math.floor((current_question) / questions.length * 100);  //arredonda para baixo; 
-        document.querySelector('.progress .progress--bar').style.width = `${pct}%`;
-        document.querySelector('.progress .progress--bar').style.marginTop = '25px';
-        document.querySelector('.progress .progress--bar').style.textAlign = 'center';
-        document.querySelector('.progress .progress--bar').style.fontSize = '25px';
-        document.querySelector('.progress .progress--bar').style.color = 'blue';
-        document.querySelector('.progress .progress--bar').innerHTML = `${pct}%`;
-        document.querySelector('.progress .progress--bar').style.margin = `10px 5px 10px 5px`;
 
+        let progressBar = document.querySelector('.progress .progress--bar');
+        progressBar.style.width = `${pct}%`;
+        progressBar.style.marginTop = '25px';
+        progressBar.style.textAlign = 'center';
+        progressBar.style.fontSize = '20px';
+        progressBar.style.color = 'blue';
+        progressBar.innerHTML = `Progresso :${pct}%`;
+        progressBar.style.margin = '10px 5px 10px 5px';
+        progressBar.style.whiteSpace = 'nowrap'; // impede quebra de linha
+        progressBar.style.overflow = 'hidden'; // evita que ultrapasse a barra
+        progressBar.style.display = 'flex'; // permite alinhar o conteúdo
+        progressBar.style.justifyContent = 'center'; // centraliza horizontalmente
+        progressBar.style.alignItems = 'center'; // centraliza verticalmente
 
 
         //esconder area de resultado
@@ -47,8 +53,13 @@ function showQuestion() {
 
         console.log(q.question); //vai no indice 0 e pega o valor da propiedade em seu objeto.
     } else {
-        //acabaram as questions.
-        document.querySelector('.progress .progress--bar').style.width = '100%'
+        // acabaram as questions
+        if (current_question === questions.length) {
+            let progressBar = document.querySelector('.progress .progress--bar');
+            progressBar.style.width = '100%';
+            progressBar.innerHTML = 'Progresso: 100%';
+        }
+
         mostraResult();
     }
 }
@@ -97,13 +108,13 @@ function mostraResult() {
 
 function resetQuestions() {
     document.getElementById('button').addEventListener('click', () => {
-    current_question = 0;
-    current_resp = 0;
-    res_correct = 0;
-    document.querySelector('.questionArea').style.display = 'none';
-    document.querySelector('.scoreArea').style.display = 'none';
+        current_question = 0;
+        current_resp = 0;
+        res_correct = 0;
+        document.querySelector('.questionArea').style.display = 'none';
+        document.querySelector('.scoreArea').style.display = 'none';
 
-    showQuestion();
+        showQuestion();
     })
 }
 

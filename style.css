@@ -29,7 +29,7 @@ h1 {
 }
 .progress--bar {
     background-color: #00FF00;
-    height: 100%;
+    height: auto;
     transition: all ease .5s;
 }
 
